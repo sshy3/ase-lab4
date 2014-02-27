@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="soapclient.js"></script>
+<head>
+</head>
+<body>
+<div page-role="page">
+  <div page-role="header" data-theme="b">
+    <h1 align="center">Soap Services ASE LAB 4</h1>
+	<h2 align="center">Web Application to Find number of Characters in String<h2>
+  </div>
+		<div page-role="content">
+		<p>Enter the String</p>
+		<input type="text" id="input1" name="string">
+		<button onclick="getstring()">Click Here</button>
+		<div id="write" align="center"></div>
+		</div>
+</div>
+<script>
+function getstring()
+{
+		var str=document.getElementById("input1").value;
+		url="http://10.0.2.2:60470/WebService.asmx"
+		var pl = new SOAPClientParameters();
+		pl.add("value",str);
+		SOAPClient.invoke(url, "stringcount", pl, true,str_callBack);
+}
+</script>
+<script>
+function str_callBack(r)
+	{
+        document.getElementById("write").innerHTML=r;
+		alert(r);
+	}
+</script>
+
+</body>
+</html>
